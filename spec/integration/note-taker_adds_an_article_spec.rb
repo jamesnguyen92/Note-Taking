@@ -9,5 +9,15 @@ feature "Note-taker adds a note" do
         expect(page).to have_field("Title")
         expect(page).to have_field("Text")
     end
+    
+    scenario "Note-taker successfully creates a new note" do
+        visit new_note_path
+        expect(page).to have_content("New Note")
+        fill_in "Title", with: "New Capybara Note"
+        fill_in "Text", with: "This is a new Capybara note"
+        click_button "Create Note"
+        expect(page).to have_content("New Capybara Note")
+        expect(page).to have_content("This is a new Capybara note")
+    end
 
 end
